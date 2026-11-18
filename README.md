@@ -8,6 +8,7 @@ downloadable without an account, whatever happens to the app's own repository.
 | --- | --- | --- |
 | [`scan-models-1`](../../releases/tag/scan-models-1) | Card-scanning models: ONNX for Android, compiled CoreML for iOS | Downloaded once, when the user asks, before the first scan |
 | [`riftbound-data`](../../releases/tag/riftbound-data) | Riftbound: a set list and one file per set, in the app's own model | Riftbound's catalogue; replaced in place when the data changes |
+| [`game-classifier`](../../releases/tag/game-classifier) | `game-classifier-v1.json`: which game a scanned card is (a linear layer on the card embedder's fingerprint, 77 KB) | Downloaded once scanning is set up, refreshed daily; replaced in place when retrained |
 | [`wuwa-data`](../../releases/tag/wuwa-data) | Wuthering Waves: Battle: a set list and one file per set and language (ja, ko, zh-cn, unofficial en) | Wuthering Waves' catalogue; replaced in place when the data changes |
 
 ## Card data format
@@ -27,6 +28,8 @@ The app checks each model file against a SHA-256 it carries before using it. Ass
 ## Licences and sources
 
 - `card_corners_640`: card corner detector, trained from scratch on synthetic data. MIT.
+- `game-classifier`: trained by this project on renders of card scans (training input only, never published).
+  MIT. Only valid with the `card_embedder` of the release it names.
 - `card_embedder`: torchvision MobileNetV3-Large with ImageNet weights, cut at its 1280-d layer.
   BSD-3-Clause (torchvision); the weights were trained on ImageNet.
 - Riftbound card data: from [Riftcodex](https://riftcodex.com/), an unofficial fan project not
